@@ -1,10 +1,18 @@
 # agent007 — full-stack dev agent for Claude Code
 
-`/agent007` orchestrates a task across four domain subagents — frontend, backend, devops,
-database. It understands the project first (existing repo: scans it; empty dir: asks
-requirements), dispatches only the subagent(s) a task actually needs, and gates any
-remote/destructive command (`git push`/`pull`, `terraform apply`, `kubectl apply/delete`,
-`docker push`, migrations, deletes) behind an explicit y/n confirmation.
+`/agent007` orchestrates a task across six subagents — frontend, backend, devops,
+database, security, tester. It understands the project first (existing repo: scans it;
+empty dir: asks requirements), dispatches only the subagent(s) a task actually needs, and
+gates any remote/destructive command (`git push`/`pull`, `terraform apply`,
+`kubectl apply/delete`, `docker push`, migrations, deletes) behind an explicit y/n
+confirmation.
+
+After implementation: changes touching a trust boundary (endpoints, input handling, auth,
+queries, uploads, config, deps) automatically get a security audit — injection, auth gaps,
+secrets, vulnerable deps, misconfig — and critical findings are fixed and re-checked before
+reporting done. Changed logic without test coverage gets tests written and run. A separate
+`/agent007-review` skill checks cross-domain seams (frontend calls vs real API shapes,
+queries vs actual schema, app vs deploy config) plus a full security pass on the diff.
 
 ## Install
 

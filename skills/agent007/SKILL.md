@@ -11,7 +11,7 @@ Run these steps in order for every invocation.
 
 Check `PROJECT_CONTEXT.md` in the current working directory.
 
-- **Exists and looks current** (spot-check against actual dir listing — no major dirs/deps missing from it): read it, skip re-scanning. This saves tokens on repeat runs.
+- **Exists**: read it, then run a cheap staleness check — compare its recorded deps against the current deps file (`package.json` etc) and its recorded structure against the top-level dir listing. Match → use it as-is, skip re-scanning (token savings). Mismatch → re-scan and rewrite **only the affected section(s)**, not the whole file.
 - **Missing, existing project** (cwd has files already): scan with Read/Grep/Glob only — directory tree, `package.json`/`requirements.txt`/deps file, README, `git log -10`. Write findings to `PROJECT_CONTEXT.md`, organized per domain so each subagent gets what it actually needs:
   - **Frontend:** framework (React/Vue/etc), styling approach (Tailwind/CSS modules/styled-components), state management, component/file layout convention.
   - **Backend:** framework, routing/handler pattern, auth mechanism, error-handling convention, response shape convention.
@@ -30,6 +30,8 @@ Break the user's task into subtasks. Map each subtask to exactly the domain(s) i
 - API routes, server logic, business logic → `agent007-backend` (`agent007:agent007-backend`)
 - CI, deploy, containers, infra-as-code → `agent007-devops` (`agent007:agent007-devops`)
 - Schema, migrations, queries → `agent007-database` (`agent007:agent007-database`)
+- Security audit of changed code → `agent007-security` (`agent007:agent007-security`) — see step 5, dispatched by rule, not by task wording
+- Test coverage for changed code → `agent007-tester` (`agent007:agent007-tester`) — see step 5
 
 Match by role/description in the available agent types list at runtime — the exact
 namespace prefix depends on how this plugin was installed (plugin vs personal copy).
@@ -53,6 +55,30 @@ API shape backend just created), dispatch sequentially.
 Collect each subagent's result, including its verification outcome — every subagent
 verifies its own work before reporting back (build/test/dry-run as appropriate to its
 domain). If any subagent reports a verification failure or couldn't verify, surface that
-explicitly rather than folding it into a generic "done." Keep the summary back to the user
-short: what changed, which files, verification result, one line per subagent. No
+explicitly rather than folding it into a generic "done."
+
+## 5. Security & test pass
+
+After implementation subtasks complete, before the final report:
+
+- **Security — mandatory when the change touches a trust boundary:** new/changed
+  endpoints, request/input handling, auth code, queries, file uploads, env/config,
+  dependency changes. Dispatch `agent007-security` with only the changed file list and a
+  one-line description of what the change was supposed to do. This is a rule keyed on
+  what the diff touched, not on whether the task sounded security-related. Skip it only
+  for changes with no trust surface at all (pure styling, copy changes, comments).
+  Critical/high findings: dispatch the responsible domain subagent to fix, then re-run
+  the security check on the fix. Medium/low: report to the user, don't auto-fix.
+- **Tests — when changed code has no coverage:** if the implementation subagents' reports
+  show changed logic that no existing test covers, dispatch `agent007-tester` with the
+  changed files list. Skip when existing tests already cover the change or the change has
+  no testable logic (config, styling).
+
+Both passes receive file lists and one-line intents — never the full conversation or the
+whole PROJECT_CONTEXT.md.
+
+## 6. Report
+
+Keep the summary back to the user short: what changed, which files, verification result,
+security verdict (`SECURITY: clean` / findings), test result — one line per subagent. No
 re-narration of what each subagent did internally.
