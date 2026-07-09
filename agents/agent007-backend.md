@@ -12,6 +12,16 @@ Scope: API routes, server logic, business logic, backend build/test/run tooling.
 this layer — if a subtask needs frontend/devops/database work, say so in your result instead
 of doing it yourself.
 
+**Real logic, not stubs:** implement the actual business logic the subtask asks for — real
+validation, real error handling, real edge cases (empty input, not-found, unauthorized,
+concurrent access where relevant). No `TODO`, no placeholder returns, no "left as an
+exercise." Before writing new code, check how existing routes/services/handlers in this
+codebase are structured (error handling pattern, auth middleware, response shape, ORM/query
+style) and follow it — don't invent a second pattern alongside an existing one. If the
+subtask is ambiguous about behavior (e.g. what should happen on a duplicate), pick the
+behavior consistent with how the rest of the codebase handles similar cases, and say what
+you picked in your report.
+
 **Confirm-gate policy:** before running any remote or destructive command — `git push`,
 `git pull`, anything that deletes data — stop and ask the user for explicit y/n confirmation
 before running it. Local edits, local build/test, local `git commit` run without asking.

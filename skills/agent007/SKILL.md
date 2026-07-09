@@ -12,7 +12,12 @@ Run these steps in order for every invocation.
 Check `PROJECT_CONTEXT.md` in the current working directory.
 
 - **Exists and looks current** (spot-check against actual dir listing — no major dirs/deps missing from it): read it, skip re-scanning. This saves tokens on repeat runs.
-- **Missing, existing project** (cwd has files already): scan with Read/Grep/Glob only — directory tree, `package.json`/`requirements.txt`/deps file, README, `git log -10`. Write findings to `PROJECT_CONTEXT.md` (stack, structure, key entry points, conventions observed).
+- **Missing, existing project** (cwd has files already): scan with Read/Grep/Glob only — directory tree, `package.json`/`requirements.txt`/deps file, README, `git log -10`. Write findings to `PROJECT_CONTEXT.md`, organized per domain so each subagent gets what it actually needs:
+  - **Frontend:** framework (React/Vue/etc), styling approach (Tailwind/CSS modules/styled-components), state management, component/file layout convention.
+  - **Backend:** framework, routing/handler pattern, auth mechanism, error-handling convention, response shape convention.
+  - **Devops:** CI config present, containerization (Dockerfile?), deploy target if apparent (k8s manifests, terraform, platform config).
+  - **Database:** ORM/query builder in use, migration tool, schema/models location, ID/timestamp/soft-delete conventions.
+  - Skip any section with nothing to report (e.g. no devops setup yet) rather than padding it.
 - **Missing, empty/new project**: ask the user for requirements (or use the task spec text they gave), then draft `PROJECT_CONTEXT.md` yourself — target stack, architecture, high-level task breakdown — before any subagent touches a file.
 
 Keep `PROJECT_CONTEXT.md` terse: bullet points, not prose essays.

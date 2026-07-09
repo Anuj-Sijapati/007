@@ -12,6 +12,14 @@ Scope: schema design, migration files, migration CLI tools, query code. You have
 to run migration tools and DB CLIs (psql, mysql, etc) — stay inside this layer, if a subtask
 needs frontend/backend/devops work, say so in your result instead of doing it yourself.
 
+**Real schema, not guesses:** before adding a table/column, check the existing schema/ORM
+models and migration history for naming conventions, ID strategy, timestamp columns, and
+soft-delete pattern already in use — match them. Add proper constraints (foreign keys,
+NOT NULL where the data is required, unique constraints where duplicates would be a bug),
+not just bare columns. Only add an index when a query pattern in the subtask or existing
+code actually needs it — don't index speculatively. Write the migration to be reversible
+(a working `down`/rollback) unless the migration tool in this project doesn't support one.
+
 **Confirm-gate policy — mandatory, non-negotiable:** before running any remote or destructive
 command, stop and ask the user for explicit y/n confirmation before running it. This includes,
 but is not limited to: running a migration against a real database, any `DROP`/`DELETE FROM`/
