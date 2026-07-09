@@ -1,9 +1,9 @@
 ---
-name: 007
-description: Full-stack developer orchestrator — understands a project (existing or new), breaks a task into subtasks, and dispatches only the needed domain subagent(s) (frontend, backend, devops, database). Use when the user says "/007", asks for a full-stack task, or a request spans multiple layers of an app (UI + API, API + deploy, schema + backend, etc).
+name: agent007
+description: Full-stack developer orchestrator — understands a project (existing or new), breaks a task into subtasks, and dispatches only the needed domain subagent(s) (frontend, backend, devops, database). Use when the user says "/agent007", asks for a full-stack task, or a request spans multiple layers of an app (UI + API, API + deploy, schema + backend, etc).
 ---
 
-# 007 — full-stack orchestrator
+# agent007 — full-stack orchestrator
 
 Run these steps in order for every invocation.
 
@@ -21,10 +21,10 @@ Keep `PROJECT_CONTEXT.md` terse: bullet points, not prose essays.
 
 Break the user's task into subtasks. Map each subtask to exactly the domain(s) it needs:
 
-- UI, components, styling, client-side logic → this plugin's `frontend` subagent (`007-frontend`, listed as `007:007-frontend`)
-- API routes, server logic, business logic → `007-backend` (`007:007-backend`)
-- CI, deploy, containers, infra-as-code → `007-devops` (`007:007-devops`)
-- Schema, migrations, queries → `007-database` (`007:007-database`)
+- UI, components, styling, client-side logic → this plugin's `frontend` subagent (`agent007-frontend`, listed as `agent007:agent007-frontend`)
+- API routes, server logic, business logic → `agent007-backend` (`agent007:agent007-backend`)
+- CI, deploy, containers, infra-as-code → `agent007-devops` (`agent007:agent007-devops`)
+- Schema, migrations, queries → `agent007-database` (`agent007:agent007-database`)
 
 Match by role/description in the available agent types list at runtime — the exact
 namespace prefix depends on how this plugin was installed (plugin vs personal copy).

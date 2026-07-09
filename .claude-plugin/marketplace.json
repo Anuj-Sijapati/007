@@ -1,14 +1,14 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "007",
-  "description": "Full-stack developer orchestrator for Claude Code. /007 dispatches frontend, backend, devops, and database subagents as needed.",
+  "name": "agent007",
+  "description": "Full-stack developer orchestrator for Claude Code. /agent007 dispatches frontend, backend, devops, and database subagents as needed.",
   "owner": {
     "name": "Anuj-Sijapati",
     "url": "https://github.com/Anuj-Sijapati"
   },
   "plugins": [
     {
-      "name": "007",
+      "name": "agent007",
       "description": "Full-stack orchestrator: understands the project, dispatches only the subagents a task needs, confirm-gates remote/destructive commands.",
       "source": "./",
       "category": "development"

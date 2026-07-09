@@ -1,6 +1,6 @@
-# 007 — full-stack dev agent for Claude Code
+# agent007 — full-stack dev agent for Claude Code
 
-`/007` orchestrates a task across four domain subagents — frontend, backend, devops,
+`/agent007` orchestrates a task across four domain subagents — frontend, backend, devops,
 database. It understands the project first (existing repo: scans it; empty dir: asks
 requirements), dispatches only the subagent(s) a task actually needs, and gates any
 remote/destructive command (`git push`/`pull`, `terraform apply`, `kubectl apply/delete`,
@@ -8,41 +8,33 @@ remote/destructive command (`git push`/`pull`, `terraform apply`, `kubectl apply
 
 ## Install
 
-**If you use the VS Code extension**, install as a plugin, from an actual terminal (not
-the VS Code chat panel — `/plugin` doesn't work there):
+Works from any terminal, including the CLI used by the VS Code extension (the VS Code
+chat panel's `/plugin` command doesn't work — run this from an actual terminal instead):
 
 ```
-claude
-```
-then inside the CLI:
-```
-/plugin marketplace add Anuj-Sijapati/007
-/plugin install 007@Anuj-Sijapati
+claude plugin marketplace add Anuj-Sijapati/007
+claude plugin install agent007@agent007
 ```
 
-Reload the VS Code window afterward. The VS Code extension's `/` autocomplete only lists
-plugin-installed commands — personal skills copied into `~/.claude/skills/` never show up
-there ([known limitation](https://github.com/anthropics/claude-code/issues/60728)), even
-though they work fine in the CLI.
+Reload the VS Code window (or start a new CLI session) afterward — skills load at session
+start, not mid-session. `/agent007:agent007` (or `/agent007` if it resolves unambiguously)
+then shows up in autocomplete.
 
-**If you only use the CLI**, either the plugin install above, or manual copy works too:
+**Manual copy (CLI only — VS Code extension's autocomplete won't show it this way):**
 
 ```
-git clone https://github.com/Anuj-Sijapati/007.git /tmp/007
-cp -r /tmp/007/skills/007 ~/.claude/skills/
-cp /tmp/007/agents/007-*.md ~/.claude/agents/
-rm -rf /tmp/007
+git clone https://github.com/Anuj-Sijapati/007.git /tmp/agent007
+cp -r /tmp/agent007/skills/agent007 ~/.claude/skills/
+cp /tmp/agent007/agents/agent007-*.md ~/.claude/agents/
+rm -rf /tmp/agent007
 ```
-
-Either way, start a **new session** after installing — skills load at session start, not
-mid-session.
 
 ## Usage
 
 ```
-/007 add a health check endpoint
-/007 scaffold a basic REST API
-/007 add an endpoint and wire up the frontend form for it
+/agent007 add a health check endpoint
+/agent007 scaffold a basic REST API
+/agent007 add an endpoint and wire up the frontend form for it
 ```
 
 The orchestrator writes/reads `PROJECT_CONTEXT.md` in the target project's root to avoid
