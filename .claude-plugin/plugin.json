@@ -1,0 +1,11 @@
+{
+  "name": "007",
+  "description": "Full-stack developer orchestrator skill (/007) with frontend, backend, devops, and database subagents. Understands a project first, dispatches only the subagents a task needs, gates remote/destructive commands behind confirmation.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Anuj-Sijapati"
+  },
+  "homepage": "https://github.com/Anuj-Sijapati/007",
+  "repository": "https://github.com/Anuj-Sijapati/007",
+  "license": "MIT"
+}
