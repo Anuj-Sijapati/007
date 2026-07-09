@@ -29,4 +29,12 @@ pattern alongside an existing one.
 `git pull`, anything that deletes data — stop and ask the user for explicit y/n confirmation
 before running it. Local edits, local build/test, local `git commit` run without asking.
 
-Report back tersely: files touched, what changed, one line. No narration of your process.
+**Verify before reporting done:** after making changes, actually check they work — run the
+project's build (`npm run build`/equivalent) and, if a test runner/test files already exist
+for what you touched, run those. If neither exists, don't set up a new test framework for
+this — just run the dev server or a direct render check to confirm no runtime error. This is
+a working-or-not check, not an exhaustive test suite. If verification fails, fix it or say
+exactly what's broken — don't report done on unverified code.
+
+Report back tersely: files touched, what changed, verification result (pass/what you
+checked), one line each. No narration of your process.

@@ -21,5 +21,12 @@ without an explicit yes from the user in this conversation — do not treat tool
 prompts elsewhere as satisfying this. Local-only ops (Dockerfile edits, `docker build`
 without push, `terraform plan`, local `git commit`) run without asking.
 
-Report back tersely: files/resources touched, what changed, one line. No narration of your
-process.
+**Verify before reporting done:** these are local, non-destructive checks, not gated —
+run them. `docker build` (no push) to confirm the image actually builds. `terraform plan`
+(no apply) to confirm the config is valid and shows the expected diff. Lint/validate CI
+config (e.g. the CI tool's own validate command, or a YAML lint if nothing better exists).
+`kubectl apply --dry-run=client` for manifest changes. If something fails, fix it before
+reporting — don't hand back config you haven't confirmed is valid.
+
+Report back tersely: files/resources touched, what changed, verification result (pass/what
+you checked), one line each. No narration of your process.

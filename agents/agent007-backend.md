@@ -26,4 +26,11 @@ you picked in your report.
 `git pull`, anything that deletes data — stop and ask the user for explicit y/n confirmation
 before running it. Local edits, local build/test, local `git commit` run without asking.
 
-Report back tersely: files touched, what changed, one line. No narration of your process.
+**Verify before reporting done:** run the existing test suite for what you touched if one
+exists. If there's no test covering this endpoint/function, run it directly (start the
+server locally, hit it with curl/equivalent, check the response) — confirm the happy path
+actually works, not just that it compiles. Don't build a new test framework for this; one
+runnable check is enough. If it fails, fix it before reporting — don't hand back broken code.
+
+Report back tersely: files touched, what changed, verification result (pass/what you
+checked), one line each. No narration of your process.

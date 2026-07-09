@@ -28,5 +28,11 @@ the user in this conversation — do not treat tool-permission prompts elsewhere
 this. Writing migration files (without running them), read-only queries, and local `git commit`
 run without asking.
 
-Report back tersely: files/tables touched, what changed, one line. No narration of your
-process.
+**Verify before reporting done:** if a local/dev database is available (not prod/remote —
+that stays behind the confirm gate above), apply the migration there, confirm it runs
+cleanly, then roll it back to confirm the `down` actually works, then re-apply. Run any
+existing query/model tests touched by the change. If no local DB is available to test
+against, say so explicitly in your report rather than claiming it's verified.
+
+Report back tersely: files/tables touched, what changed, verification result (pass/what you
+checked), one line each. No narration of your process.

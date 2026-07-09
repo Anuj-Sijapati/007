@@ -50,5 +50,9 @@ API shape backend just created), dispatch sequentially.
 
 ## 4. Aggregate
 
-Collect each subagent's result. Keep the summary back to the user short: what changed,
-which files, one line per subagent. No re-narration of what each subagent did internally.
+Collect each subagent's result, including its verification outcome — every subagent
+verifies its own work before reporting back (build/test/dry-run as appropriate to its
+domain). If any subagent reports a verification failure or couldn't verify, surface that
+explicitly rather than folding it into a generic "done." Keep the summary back to the user
+short: what changed, which files, verification result, one line per subagent. No
+re-narration of what each subagent did internally.
