@@ -8,12 +8,23 @@ remote/destructive command (`git push`/`pull`, `terraform apply`, `kubectl apply
 
 ## Install
 
+**Manual (works everywhere — CLI, VS Code extension, any Claude Code environment):**
+
+```
+git clone https://github.com/Anuj-Sijapati/007.git /tmp/007
+cp -r /tmp/007/skills/007 ~/.claude/skills/
+cp /tmp/007/agents/007-*.md ~/.claude/agents/
+rm -rf /tmp/007
+```
+
+Restart Claude Code — `/007` is now available globally, in every project.
+
+**Plugin marketplace (Claude Code CLI only, where `/plugin` is supported):**
+
 ```
 /plugin marketplace add Anuj-Sijapati/007
 /plugin install 007@Anuj-Sijapati
 ```
-
-Scope defaults to `user` — installs globally across all your projects.
 
 ## Usage
 
