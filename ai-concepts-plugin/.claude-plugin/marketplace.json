@@ -1,0 +1,13 @@
+{
+  "name": "anuj-plugins",
+  "owner": {
+    "name": "Anuj"
+  },
+  "plugins": [
+    {
+      "name": "ai-concepts",
+      "source": "./",
+      "description": "AI concepts cheat sheet — agents, skills, MCP, RAG, and core LLM terminology, available as /ai-concepts in any project."
+    }
+  ]
+}

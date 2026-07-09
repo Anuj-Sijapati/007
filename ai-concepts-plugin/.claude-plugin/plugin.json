@@ -1,0 +1,8 @@
+{
+  "name": "ai-concepts",
+  "version": "1.0.0",
+  "description": "AI concepts cheat sheet — agents, skills, MCP, RAG, and core LLM terminology, available as /ai-concepts in any project.",
+  "author": {
+    "name": "Anuj"
+  }
+}
