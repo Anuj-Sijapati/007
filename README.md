@@ -16,8 +16,29 @@ queries vs actual schema, app vs deploy config) plus a full security pass on the
 
 ## Install
 
-You need [Claude Code](https://claude.com/claude-code) installed. Then, in **any
-terminal**, run these two commands:
+agent007 runs *inside* Claude Code (it's a set of skills and subagents), so Claude Code is
+required. If you don't have it yet, that's **Step 1** below — the whole thing takes about a
+minute from scratch.
+
+### Step 1 — Install Claude Code (skip if you already have it)
+
+Claude Code needs [Node.js 18+](https://nodejs.org). Then, in a terminal:
+
+```
+npm install -g @anthropic-ai/claude-code
+```
+
+Start it once and sign in (needs a Claude account — free or paid):
+
+```
+claude
+```
+
+Follow the login prompt, then type `/exit` to return to your shell.
+
+### Step 2 — Install agent007
+
+In **any terminal**, run these two commands:
 
 ```
 claude plugin marketplace add Anuj-Sijapati/007
@@ -26,7 +47,7 @@ claude plugin install agent007@agent007
 
 That's it. Restart Claude Code and type `/agent007` to use it.
 
-### Where to run the two commands, per editor
+### Where to run Step 2, per editor
 
 The commands are the same everywhere — only *where* you type them differs:
 
