@@ -75,6 +75,33 @@ claude plugin update agent007@agent007
 claude plugin uninstall agent007@agent007
 ```
 
+## Using a non-Anthropic model (Cerebras, Qwen, DeepSeek, local, etc.)
+
+agent007 is pure markdown — it doesn't care which model runs it. To use it with a
+non-Anthropic provider, you point the **Claude Code harness** at that provider through a
+gateway; agent007 needs no changes and installs exactly as above.
+
+Easiest path is [`claude-code-router`](https://github.com/musistudio/claude-code-router)
+(open-source proxy that maps Claude Code's requests to Cerebras/OpenAI-compatible/local
+models):
+
+```
+npm install -g @musistudio/claude-code-router
+ccr code            # starts Claude Code routed through your configured provider
+```
+
+Configure your Cerebras (or other) API key and model in the router's config, then install
+agent007 into that session the same way. Alternatives: [LiteLLM proxy](https://docs.litellm.ai/docs/tutorials/claude_non_anthropic_models)
+or [Bifrost](https://github.com/maximhq/bifrost), both exposing an Anthropic-compatible
+endpoint you set via `ANTHROPIC_BASE_URL`.
+
+> **Honest caveat.** agent007's whole design leans on reliable tool-calling and subagent
+> dispatch. Anthropic models do this well; many non-Anthropic models (smaller Llama/Qwen
+> variants) call tools less reliably, so subagent dispatch and the security/test passes may
+> misfire or get skipped. It runs — but expect the strongest results on Claude models.
+> This is a property of the model, not something a plugin can fix. Anthropic does not
+> officially support routing Claude Code to non-Claude models.
+
 ## Usage
 
 ```
