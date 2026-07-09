@@ -1,4 +1,8 @@
-# agent007 — full-stack dev agent for Claude Code
+# agent007 — full-stack dev agent
+
+Works in **VS Code, Cursor, JetBrains IDEs, and the terminal** — anywhere you can run
+[Claude Code](https://claude.com/claude-code), the engine it plugs into. Install once,
+use `/agent007` in every project.
 
 `/agent007` orchestrates a task across six subagents — frontend, backend, devops,
 database, security, tester. It understands the project first (existing repo: scans it;
