@@ -16,25 +16,42 @@ queries vs actual schema, app vs deploy config) plus a full security pass on the
 
 ## Install
 
-Works from any terminal, including the CLI used by the VS Code extension (the VS Code
-chat panel's `/plugin` command doesn't work — run this from an actual terminal instead):
+You need [Claude Code](https://claude.com/claude-code) installed. Then, in **any
+terminal**, run these two commands:
 
 ```
 claude plugin marketplace add Anuj-Sijapati/007
 claude plugin install agent007@agent007
 ```
 
-Reload the VS Code window (or start a new CLI session) afterward — skills load at session
-start, not mid-session. `/agent007:agent007` (or `/agent007` if it resolves unambiguously)
-then shows up in autocomplete.
+That's it. Restart Claude Code and type `/agent007` to use it.
 
-**Manual copy (CLI only — VS Code extension's autocomplete won't show it this way):**
+### Where to run the two commands, per editor
+
+The commands are the same everywhere — only *where* you type them differs:
+
+| Editor | Where to run | After install |
+|--------|--------------|---------------|
+| **Terminal / CLI** | Your normal shell | Start a new `claude` session |
+| **VS Code** | Integrated terminal (`` Ctrl+` ``) — **not** the chat box | Reload window (`Ctrl/Cmd+Shift+P` → "Reload Window") |
+| **Cursor** | Integrated terminal (`` Ctrl+` ``) — **not** the chat box | Reload window (`Ctrl/Cmd+Shift+P` → "Reload Window") |
+| **JetBrains (IntelliJ/PyCharm/etc)** | Built-in terminal tab | Restart the IDE |
+
+> **Why the terminal and not the chat box?** In the VS Code / Cursor extensions the
+> `/plugin` command only works from a real terminal, not the chat input. Run the two
+> commands in the terminal once, reload, and `/agent007` then appears in the chat box
+> normally.
+
+### Updating later
 
 ```
-git clone https://github.com/Anuj-Sijapati/007.git /tmp/agent007
-cp -r /tmp/agent007/skills/agent007 ~/.claude/skills/
-cp /tmp/agent007/agents/agent007-*.md ~/.claude/agents/
-rm -rf /tmp/agent007
+claude plugin update agent007@agent007
+```
+
+### Uninstalling
+
+```
+claude plugin uninstall agent007@agent007
 ```
 
 ## Usage
